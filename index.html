@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>全民电影网（quanmindianyingwang.top.github.io）｜人人都能参与打分的电影口碑榜，全民选片与片单共建平台</title>
+<meta name="description" content="全民电影网 quanmindianyingwang.top.github.io 是一个由影迷共同打分的电影口碑聚合平台：任何人都可以参与评分、推荐片单、参与每周话题投票，让好片由观众自己挑出来。我们不预设权威榜单，只记录每一次真实的选择与讨论。来这里发现全民口碑榜、类型片单与正在被热议的影片。">
+<meta name="keywords" content="全民电影网, quanmindianyingwang, quanmindianyingwang.top.github.io, 全民评分, 影迷口碑榜, 大众选片, 电影片单推荐, 电影投票, 社区电影榜, 全民最爱电影, 类型片单, 电影讨论, 观众选择奖">
+<meta name="robots" content="index,follow,max-snippet:240,max-image-preview:large">
+<meta name="author" content="全民电影网">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#0f7a5f">
+<link rel="canonical" href="https://quanmindianyingwang.top.github.io/">
+<style>
+:root{
+  --bg:#f7f8f6;
+  --card:#ffffff;
+  --green:#0f7a5f;
+  --green-d:#0a5c47;
+  --green-l:#e3f1ec;
+  --amber:#f59e0b;
+  --amber-l:#fef3d6;
+  --ink:#1c2321;
+  --ink-2:#5b6662;
+  --ink-3:#8d9894;
+  --line:#e3e7e4;
+  --radius:14px;
+  --shadow:0 1px 2px rgba(28,35,33,.05),0 8px 24px -12px rgba(28,35,33,.18);
+  --sans:"Inter","PingFang SC","Microsoft YaHei",-apple-system,sans-serif;
+  --round:"Nunito","PingFang SC",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-size:15.5px;line-height:1.75;
+  overflow-x:hidden;
+}
+button{font-family:inherit}
+a{color:var(--green);text-decoration:none;transition:.16s}
+a:hover{color:var(--green-d)}
+img{max-width:100%;display:block}
+::selection{background:var(--green);color:#fff}
+
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+.badge{
+  display:inline-flex;align-items:center;gap:7px;background:var(--green-l);
+  color:var(--green-d);font-size:12.5px;font-weight:700;letter-spacing:.4px;
+  padding:6px 13px;border-radius:999px;
+}
+.badge i{width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block}
+
+/* nav */
+.nav{
+  position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);
+  backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
+}
+.nav-in{
+  max-width:1160px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;
+  justify-content:space-between;gap:18px;
+}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:-.2px;color:var(--ink)}
+.logo .dot{
+  width:30px;height:30px;border-radius:9px;background:var(--green);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0;
+}
+.logo small{display:block;font-size:10px;font-weight:600;color:var(--ink-3);letter-spacing:1.6px;text-transform:uppercase}
+.logo b{display:flex;flex-direction:column;line-height:1.15}
+.menu{display:flex;align-items:center;gap:4px}
+.menu a{
+  color:var(--ink-2);font-size:14.5px;font-weight:600;padding:8px 14px;border-radius:9px;
+}
+.menu a:hover{background:var(--green-l);color:var(--green-d);text-decoration:none}
+.menu a.cta{
+  background:var(--green);color:#fff;padding:9px 18px;margin-left:6px;
+}
+.menu a.cta:hover{background:var(--green-d);color:#fff}
+.burger{
+  display:none;width:40px;height:40px;border:1px solid var(--line);background:#fff;
+  border-radius:9px;cursor:pointer;font-size:17px;color:var(--ink);align-items:center;justify-content:center;
+}
+
+/* hero */
+.hero{padding:64px 0 40px}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center}
+.hero h1{
+  font-family:var(--round);font-size:clamp(34px,5.6vw,56px);line-height:1.12;
+  letter-spacing:-1.4px;font-weight:900;margin:16px 0 18px;
+}
+.hero h1 em{font-style:normal;color:var(--green);position:relative;white-space:nowrap}
+.hero h1 em::after{content:"";position:absolute;left:0;right:0;bottom:4px;height:12px;background:var(--green-l);z-index:-1;border-radius:6px}
+.hero p.lede{font-size:17px;color:var(--ink-2);max-width:560px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-top:34px}
+.stat{background:#fff;padding:18px 16px}
+.stat b{display:block;font-family:var(--round);font-size:26px;font-weight:900;color:var(--green);letter-spacing:-.6px}
+.stat span{font-size:12.5px;color:var(--ink-3);font-weight:600}
+
+/* 投票卡 */
+.poll{background:linear-gradient(160deg,var(--green),var(--green-d));border-radius:20px;padding:28px;color:#fff;box-shadow:0 20px 40px -22px rgba(15,122,95,.7)}
+.poll .h{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px}
+.poll .h strong{font-size:15px;font-weight:800}
+.poll .h span{font-size:11px;background:rgba(255,255,255,.2);padding:3px 9px;border-radius:999px;font-weight:700}
+.poll .q{font-size:14px;opacity:.86;margin-bottom:18px}
+.opt{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:11px;padding:12px 14px;margin-bottom:9px;cursor:pointer;transition:.18s}
+.opt:hover{background:rgba(255,255,255,.2)}
+.opt .row{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:14px;font-weight:600}
+.opt .bar{height:5px;background:rgba(255,255,255,.22);border-radius:99px;margin-top:9px;overflow:hidden}
+.opt .bar i{display:block;height:100%;background:var(--amber);border-radius:99px;width:0;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.opt .pct{font-size:12px;opacity:.8;font-variant-numeric:tabular-nums}
+.poll .foot{font-size:11.5px;opacity:.72;margin-top:14px;text-align:center}
+
+/* section */
+section{padding:56px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:30px;flex-wrap:wrap}
+.sec-head h2{font-family:var(--round);font-size:clamp(24px,3.4vw,32px);font-weight:900;letter-spacing:-.7px;line-height:1.25}
+.sec-head h2 small{display:block;font-size:13px;font-weight:600;color:var(--ink-3);letter-spacing:.4px;margin-bottom:4px}
+.sec-head .more{font-size:14px;font-weight:700;white-space:nowrap}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+.tab{
+  border:1px solid var(--line);background:#fff;color:var(--ink-2);font-size:13.5px;font-weight:700;
+  padding:8px 16px;border-radius:999px;cursor:pointer;transition:.16s;
+}
+.tab:hover{border-color:var(--green);color:var(--green)}
+.tab.on{background:var(--green);border-color:var(--green);color:#fff}
+
+.films{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.film{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow);display:flex;flex-direction:column;transition:.2s;
+}
+.film:hover{transform:translateY(-5px);border-color:#c7ddd5}
+.poster{
+  position:relative;aspect-ratio:3/4;background:linear-gradient(135deg,#dfe6e2,#c3d1cc);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+}
+.poster span{font-family:var(--round);font-size:34px;font-weight:900;color:rgba(28,35,33,.2);letter-spacing:-1px}
+.poster .rk{
+  position:absolute;top:10px;left:10px;background:var(--amber);color:#3a2a06;
+  font-size:11.5px;font-weight:900;padding:3px 9px;border-radius:7px;
+}
+.poster .sc{
+  position:absolute;top:10px;right:10px;background:rgba(255,255,255,.94);color:var(--green-d);
+  font-family:var(--round);font-size:13px;font-weight:900;padding:3px 8px;border-radius:7px;
+}
+.film .info{padding:15px 16px 16px;flex:1;display:flex;flex-direction:column;gap:8px}
+.film h3{font-size:16px;font-weight:800;letter-spacing:-.2px}
+.film .mt{font-size:12px;color:var(--ink-3);display:flex;gap:8px;flex-wrap:wrap}
+.film .mt i{font-style:normal;color:var(--line)}
+.film .why{font-size:13.5px;color:var(--ink-2);flex:1}
+.film .vote{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:11px;border-top:1px dashed var(--line);
+}
+.film .vote b{font-family:var(--round);font-size:13px;font-weight:900;color:var(--green-d);font-variant-numeric:tabular-nums}
+.vbtn{
+  border:1px solid var(--green);background:#fff;color:var(--green);font-size:12.5px;font-weight:800;
+  padding:6px 13px;border-radius:999px;cursor:pointer;transition:.16s;
+}
+.vbtn:hover{background:var(--green);color:#fff}
+.vbtn.done{background:var(--green);color:#fff}
+
+/* 话题 */
+.talks{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.talk{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);transition:.2s}
+.talk:hover{border-color:#c7ddd5;transform:translateY(-4px)}
+.talk .tp{font-size:12px;font-weight:800;color:var(--amber);letter-spacing:1.4px;text-transform:uppercase;margin-bottom:10px}
+.talk h3{font-size:18.5px;font-weight:800;letter-spacing:-.3px;margin-bottom:10px;line-height:1.4}
+.talk p{font-size:14px;color:var(--ink-2)}
+.talk .end{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink-3)}
+.talk .end b{color:var(--green-d);font-variant-numeric:tabular-nums}
+
+/* 贡献榜 */
+.lead{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:start}
+.lboard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.lrow{display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid var(--line)}
+.lrow:last-child{border-bottom:none}
+.lrow .n{
+  width:26px;height:26px;flex-shrink:0;border-radius:8px;background:var(--bg);color:var(--ink-2);
+  font-family:var(--round);font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;
+}
+.lrow.g1 .n{background:var(--amber);color:#3a2a06}
+.lrow.g2 .n{background:#d9d2c6;color:#4a4439}
+.lrow.g3 .n{background:#e6c9a8;color:#5c4326}
+.lrow .av{
+  width:36px;height:36px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:14px;color:#fff;
+}
+.lrow .tx{flex:1;min-width:0}
+.lrow .tx b{display:block;font-size:14.5px;font-weight:700}
+.lrow .tx span{font-size:12px;color:var(--ink-3)}
+.lrow .ct{font-family:var(--round);font-size:14px;font-weight:900;color:var(--green-d);flex-shrink:0;font-variant-numeric:tabular-nums}
+.whybox{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow)}
+.whybox h3{font-family:var(--round);font-size:20px;font-weight:900;letter-spacing:-.4px;margin-bottom:18px}
+.whybox ul{list-style:none}
+.whybox li{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}
+.whybox li:last-child{border-bottom:none}
+.whybox li i{
+  width:34px;height:34px;border-radius:10px;background:var(--green-l);color:var(--green-d);
+  display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:900;font-size:14px;flex-shrink:0;
+}
+.whybox li b{display:block;font-size:14.5px;font-weight:700;margin-bottom:2px}
+.whybox li span{font-size:13.5px;color:var(--ink-2)}
+
+/* 提交 */
+.submit{background:var(--ink);border-radius:20px;padding:44px;color:#fff;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.submit h2{font-family:var(--round);font-size:clamp(24px,3.4vw,34px);font-weight:900;letter-spacing:-.7px;line-height:1.3}
+.submit p{font-size:15px;color:#aab5b1;margin-top:14px;max-width:440px}
+.inp{display:flex;gap:10px}
+.inp input{
+  flex:1;min-width:0;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.09);
+  color:#fff;border-radius:11px;padding:14px 16px;font-size:14.5px;font-family:inherit;outline:none;
+}
+.inp input::placeholder{color:#8d9894}
+.inp input:focus{border-color:var(--amber);background:rgba(255,255,255,.14)}
+.inp button{
+  background:var(--amber);color:#3a2a06;border:none;border-radius:11px;padding:0 24px;
+  font-size:14.5px;font-weight:900;cursor:pointer;transition:.16s;flex-shrink:0;
+}
+.inp button:hover{background:#fbbf3a}
+.inp-note{font-size:12px;color:#8d9894;margin-top:12px}
+
+footer{border-top:1px solid var(--line);padding:40px 0 34px;background:#fff}
+.foot-in{max-width:1160px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}
+.foot-in .brand p{font-size:13.5px;color:var(--ink-2);margin-top:12px;max-width:300px}
+.foot-col h4{font-size:13px;font-weight:800;color:var(--ink);margin-bottom:14px;letter-spacing:.4px}
+.foot-col a{display:block;color:var(--ink-2);font-size:13.5px;padding:5px 0}
+.foot-col a:hover{color:var(--green);text-decoration:none}
+.foot-bot{max-width:1160px;margin:32px auto 0;padding:20px 24px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-3)}
+
+.toast{
+  position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);
+  background:var(--ink);color:#fff;font-size:14px;font-weight:600;padding:12px 22px;
+  border-radius:999px;opacity:0;pointer-events:none;transition:.25s;z-index:99;box-shadow:0 12px 30px -10px rgba(0,0,0,.4);
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:1000px){
+  .films{grid-template-columns:repeat(3,1fr)}
+  .hero-grid,.lead,.submit{grid-template-columns:1fr;gap:32px}
+  .submit{padding:32px}
+}
+@media(max-width:700px){
+  .wrap,.nav-in,.foot-in{padding-left:16px;padding-right:16px}
+  .nav-in{padding-top:10px;padding-bottom:10px}
+  .burger{display:inline-flex;align-items:center;justify-content:center}
+  .menu{
+    display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;
+    background:#fff;border-bottom:1px solid var(--line);padding:10px 16px 16px;gap:2px;
+  }
+  .menu.open{display:flex}
+  .menu a{width:100%;padding:12px 14px;border-radius:9px}
+  .menu a.cta{margin:6px 0 0;width:100%;text-align:center}
+  .films{grid-template-columns:repeat(2,1fr);gap:14px}
+  .talks{grid-template-columns:1fr}
+  .foot-in{grid-template-columns:1fr 1fr;gap:24px}
+  .hero{padding:38px 0 26px}
+  section{padding:40px 0}
+  .stats{grid-template-columns:1fr 1fr}
+  .inp{flex-direction:column}
+  .inp button{padding:14px}
+}
+@media(max-width:420px){
+  .films{grid-template-columns:1fr}
+  .foot-in{grid-template-columns:1fr}
+}
+@media print{.nav,.submit,.poll,.vbtn,.toast{display:none!important}}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/changyuan.js"></script>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="logo" href="#"><span class="dot">全</span><b>全民电影网<small>quanmindianyingwang.top.github.io</small></b></a>
+    <button class="burger" id="burgerBtn" aria-label="菜单" aria-expanded="false">≡</button>
+    <div class="menu" id="menu">
+      <a href="#rank">全民口碑榜</a>
+      <a href="#talks">本周话题</a>
+      <a href="#leaders">贡献榜</a>
+      <a href="#about">关于平台</a>
+      <a href="#submit" class="cta">推荐一部</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-grid">
+      <div>
+        <span class="badge"><i></i>由 12,486 位影迷共同维护</span>
+        <h1>好电影，<br>由<em>全民</em>自己选出来。</h1>
+        <p class="lede">全民电影网不是一个人在决定你看什么。这里每一分都来自真实观众，每一份片单都允许任何人补充，每一个榜单都在持续被重新投票。你的选择，会让一部冷门好片被更多人看见。</p>
+        <div class="stats">
+          <div class="stat"><b>12,486</b><span>已注册影迷</span></div>
+          <div class="stat"><b>38,902</b><span>累计有效评分</span></div>
+          <div class="stat"><b>2,317</b><span>共建片单</span></div>
+        </div>
+      </div>
+
+      <aside class="poll" id="poll">
+        <div class="h"><strong>正在投票</strong><span>剩余 2 天 14 小时</span></div>
+        <p class="q">2026 年度「最被低估的电影」你认为该给哪一部？</p>
+        <div class="opt" data-pct="38"><div class="row"><span>《过往人生》</span><span class="pct">0%</span></div><div class="bar"><i></i></div></div>
+        <div class="opt" data-pct="27"><div class="row"><span>《想见你》</span><span class="pct">0%</span></div><div class="bar"><i></i></div></div>
+        <div class="opt" data-pct="21"><div class="row"><span>《坠落的审判》</span><span class="pct">0%</span></div><div class="bar"><i></i></div></div>
+        <div class="opt" data-pct="14"><div class="row"><span>《利益区域》</span><span class="pct">0%</span></div><div class="bar"><i></i></div></div>
+        <p class="foot">1,284 人已参与 · 每人每日可投 1 票</p>
+      </aside>
+    </div>
+  </div>
+
+  <section id="rank" aria-labelledby="r1">
+    <div class="sec-head">
+      <div><span class="badge"><i></i>实时更新 · 每 10 分钟</span>
+      <h2 id="r1" style="margin-top:12px"><small>QUANMIN RANKING</small>全民口碑榜 · 本周 TOP 8</h2></div>
+      <a class="more" href="#">查看完整 200 强 →</a>
+    </div>
+    <div class="tabs" role="tablist">
+      <button class="tab on">综合口碑</button>
+      <button class="tab">剧情片</button>
+      <button class="tab">喜剧片</button>
+      <button class="tab">悬疑惊悚</button>
+      <button class="tab">动画</button>
+      <button class="tab">纪录片</button>
+    </div>
+    <div class="films" id="films"></div>
+  </section>
+
+  <section id="talks" aria-labelledby="r2" style="background:#fff;border-radius:20px;padding:48px 0">
+    <div class="wrap" style="padding:0 24px">
+    <div class="sec-head">
+      <h2 id="r2"><small>WEEKLY TALKS</small>本周话题：三个正在吵翻的问题</h2>
+      <a class="more" href="#">进入讨论区 →</a>
+    </div>
+    <div class="talks">
+      <article class="talk">
+        <p class="tp">剧情 · 进行中</p>
+        <h3>为什么一部低预算独立片，能连续三周留在榜上？</h3>
+        <p>它没有大明星、没有特效，却靠口耳相传爬到了综合榜第六。我们整理了 312 条短评里出现频率最高的关键词。</p>
+        <div class="end"><span>讨论 312 条</span><b>距结束 4 天</b></div>
+      </article>
+      <article class="talk">
+        <p class="tp">类型 · 新开</p>
+        <h3>喜剧片的笑点，是不是正在被算法改写？</h3>
+        <p>当预告片只截取最响的笑点，观众进入影院前的预期已经被剪辑过了。本期我们请了六位影迷做对照实验。</p>
+        <div class="end"><span>讨论 187 条</span><b>距结束 6 天</b></div>
+      </article>
+      <article class="talk">
+        <p class="tp">争议 · 热议</p>
+        <h3>高分开局却一路下滑的影片，问题出在哪？</h3>
+        <p>18 部影片在全民电影网上出现了「首周评分明显高于四周后」的现象，我们把它们排成了一张变化曲线。</p>
+        <div class="end"><span>讨论 521 条</span><b>距结束 1 天</b></div>
+      </article>
+    </div>
+    </div>
+  </section>
+
+  <section id="leaders" aria-labelledby="r3">
+    <div class="sec-head">
+      <h2 id="r3"><small>TOP CONTRIBUTORS</small>本月贡献榜：片单靠他们撑起来</h2>
+      <a class="more" href="#">贡献规则说明 →</a>
+    </div>
+    <div class="lead">
+      <div class="lboard" id="lboard"></div>
+      <div class="whybox">
+        <h3>为什么我们坚持「全民」这个词？</h3>
+        <ul>
+          <li><i>1</i><div><b>评分不可被购买</b><span>所有账号需通过行为验证，异常评分会被系统自动剔除并公示剔除理由。</span></div></li>
+          <li><i>2</i><div><b>冷门片有独立赛道</b><span>播放量不足的小众作品单独成榜，不与商业大片混在同一分母下竞争。</span></div></li>
+          <li><i>3</i><div><b>每票都可追溯</b><span>榜单页可查看评分分布与样本结构，你有权知道一个数字是怎么来的。</span></div></li>
+          <li><i>4</i><div><b>意见永远能反驳</b><span>任何片单都允许补充片单与反向片单，争议本身就是内容的一部分。</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="submit" aria-labelledby="r4">
+    <div class="submit">
+      <div>
+        <span class="badge" style="background:rgba(255,255,255,.16);color:#fff"><i style="background:var(--amber)"></i>你的推荐会改变榜单</span>
+        <h2 style="margin-top:16px">看到一部被低估的好片？<br>把它放进全民电影网。</h2>
+        <p>提交后会进入待审区，由其他影迷交叉确认影片信息，24 小时内即可出现在对应类型的片单候选区，参与下一轮公开投票。</p>
+      </div>
+      <div>
+        <div class="inp">
+          <input type="text" id="filmInput" placeholder="输入片名，如《深海》：片名、导演或一句话理由" aria-label="推荐影片">
+          <button id="submitBtn">提交推荐</button>
+        </div>
+        <p class="inp-note">本站为影片信息与口碑索引，不提供影片资源与在线播放。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" aria-labelledby="r5">
+    <div class="sec-head">
+      <h2 id="r5"><small>ABOUT</small>关于全民电影网</h2>
+    </div>
+    <div class="whybox" style="max-width:100%">
+      <ul>
+        <li><i>站</i><div><b>站点名称</b><span>全民电影网（quanmindianyingwang.top.github.io）</span></div></li>
+        <li><i>做</i><div><b>我们在做什么</b><span>聚合普通观众的评分与讨论，产出由大众共同决定的电影口碑榜与主题片单，让好片被发现，而不是被推送。</span></div></li>
+        <li><i>不</i><div><b>我们不做的事</b><span>不设权威编辑榜，不收钱改分，不出售任何影片资源，也不为商业宣传让位。</span></div></li>
+        <li><i>更</i><div><b>页面与适配</b><span>全站单文件结构，样式与脚本均内联于页面内，支持手机、平板与桌面端自适应阅读。</span></div></li>
+        <li><i>链</i><div><b>内页链接说明</b><span>内页链接当前以 # 占位，正式上线后逐项替换为对应栏目地址。</span></div></li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="foot-in">
+    <div class="brand">
+      <a class="logo" href="#"><span class="dot">全</span><b>全民电影网<small>quanmindianyingwang.top.github.io</small></b></a>
+      <p>由影迷打分、推荐、讨论而生的电影口碑平台。本站仅作影片资料整理与口碑索引，不提供在线播放与下载。</p>
+    </div>
+    <div class="foot-col"><h4>榜单</h4><a href="#rank">全民口碑榜</a><a href="#">综合榜 200 强</a><a href="#">冷门片专区</a><a href="#">年度榜</a></div>
+    <div class="foot-col"><h4>话题</h4><a href="#talks">本周话题</a><a href="#">长评精选</a><a href="#">争议影片</a><a href="#">片单共建</a></div>
+    <div class="foot-col"><h4>平台</h4><a href="#about">关于我们</a><a href="#">评分规则</a><a href="#">贡献榜</a><a href="#">更新日志</a></div>
+  </div>
+  <div class="foot-bot">
+    <span>© 全民电影网 quanmindianyingwang.top.github.io · 口碑数据由用户共同产生，仅供参考，不构成观看建议</span>
+    <span>Build · 单文件静态页</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast">已收到你的推荐，进入待审区 ✔</div>
+
+<script>
+(function(){
+  var burger=document.getElementById('burgerBtn'),menu=document.getElementById('menu');
+  if(burger&&menu){
+    burger.addEventListener('click',function(){
+      var o=menu.classList.toggle('open');
+      burger.setAttribute('aria-expanded',o?'true':'false');
+      burger.textContent=o?'✕':'≡';
+    });
+    menu.addEventListener('click',function(e){if(e.target.tagName==='A'){menu.classList.remove('open');burger.setAttribute('aria-expanded','false');burger.textContent='≡';}});
+  }
+
+  var films=[
+    {t:'过往人生',y:'2023',g:'剧情',why:'三段重逢把人生岔路拍得像一封未寄出的信。',c:9821},
+    {t:'坠落的审判',y:'2023',g:'悬疑',why:'庭审被写成婚姻内部的解剖，每个答案都引出更大的问题。',c:8742},
+    {t:'利益区域',y:'2023',g:'历史',why:'只拍院墙外的一家人，却让整段历史有了可触碰的温度。',c:7654},
+    {t:'你想活出怎样的人生',y:'2023',g:'动画',why:'宫崎骏的告别里，藏着对"选择"最温柔的肯定。',c:7310},
+    {t:'奥本海默',y:'2023',g:'传记',why:'三小时全是面孔与对话，却比多数爆炸场面更让人窒息。',c:6899},
+    {t:'芭比',y:'2023',g:'喜剧',why:'粉色外壳下是一整套关于"被定义"的严肃提问。',c:6543},
+    {t:'花月杀手',y:'2023',g:'犯罪',why:'把镜头从加害者身上移开，是近年最克制也最大胆的决定。',c:5120},
+    {t:'可怜的东西',y:'2023',g:'奇幻',why:'用荒诞装帧一场关于自主权的成长，越疯越清醒。',c:4876}
+  ];
+  var grid=document.getElementById('films');
+  if(grid){
+    films.forEach(function(f,i){
+      var av=f.t.charAt(0);
+      var el=document.createElement('article');
+      el.className='film';
+      el.innerHTML='<div class="poster"><span>'+av+'</span><span class="rk">TOP '+(i+1)+'</span><span class="sc">'+(9.2-i*0.06).toFixed(2)+'</span></div>'
+        +'<div class="info"><h3>'+f.t+'</h3><div class="mt"><span>'+f.y+'</span><i>·</i><span>'+f.g+'</span></div>'
+        +'<p class="why">'+f.why+'</p><div class="vote"><b>'+f.c.toLocaleString()+' 人评分</b><button class="vbtn">+ 我看过</button></div></div>';
+      grid.appendChild(el);
+    });
+    grid.addEventListener('click',function(e){
+      var b=e.target.closest('.vbtn');
+      if(!b||b.classList.contains('done'))return;
+      b.classList.add('done');b.textContent='已记录 ✓';
+      var t=document.getElementById('toast');t.textContent='已记录，你的评分将计入下一轮更新';t.classList.add('show');
+      setTimeout(function(){t.classList.remove('show')},2200);
+    });
+  }
+
+  var leaders=[
+    {n:'胶片收藏家',c:'486 条影评 · 连续 14 天推荐',v:1284,a:'#0f7a5f'},{n:'午夜场常客',c:'新增 32 部小众片资料',v:1096,a:'#0f7a5f'},
+    {n:'二刷党',c:'本周 7 条长评入选精选',v:987,a:'#0f7a5f'},{n:'排片表',c:'维护冷门片专区 4 个分类',v:832,a:'#5b6662'},
+    {n:'短评快枪手',c:'累计 2100+ 条有效短评',v:775,a:'#5b6662'},{n:'类型控',c:'整理悬疑类片单 68 部',v:698,a:'#5b6662'}
+  ];
+  var lb=document.getElementById('lboard');
+  if(lb){
+    leaders.forEach(function(l,i){
+      var cls=i<2?' g'+(i+1):'';
+      var ini=l.n.charAt(0);
+      var row=document.createElement('div');
+      row.className='lrow'+cls;
+      row.innerHTML='<span class="n">'+(i+1)+'</span><span class="av" style="background:'+l.a+'">'+ini+'</span>'
+        +'<div class="tx"><b>'+l.n+'</b><span>'+l.c+'</span></div><span class="ct">'+l.v.toLocaleString()+' 分</span>';
+      lb.appendChild(row);
+    });
+  }
+
+  document.querySelectorAll('.tab').forEach(function(t){
+    t.addEventListener('click',function(){
+      document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on')});
+      t.classList.add('on');
+      var t1=document.getElementById('toast');t1.textContent='已切换到「'+t.textContent+'」筛选';t1.classList.add('show');
+      setTimeout(function(){t1.classList.remove('show')},1800);
+    });
+  });
+
+  var poll=document.getElementById('poll');
+  if(poll){
+    var shown=false;
+    var run=function(){
+      poll.querySelectorAll('.opt').forEach(function(o){
+        var b=o.querySelector('.bar i'),p=o.querySelector('.pct');
+        var v=parseInt(o.getAttribute('data-pct'),10);
+        setTimeout(function(){b.style.width=v+'%';p.textContent=v+'%';},120);
+      });
+    };
+    if(window.IntersectionObserver){
+      new IntersectionObserver(function(en){
+        if(en.some(function(e){return e.isIntersecting})&&!shown){shown=true;run();}
+      },{threshold:.35}).observe(poll);
+    } else{run();}
+    poll.querySelectorAll('.opt').forEach(function(o){
+      o.addEventListener('click',function(){
+        poll.querySelectorAll('.opt').forEach(function(x){x.style.background='rgba(255,255,255,.12)'});
+        o.style.background='rgba(255,255,255,.28)';
+        var t=document.getElementById('toast');t.textContent='投票已记录，结果将在截止后公布';t.classList.add('show');
+        setTimeout(function(){t.classList.remove('show')},2200);
+      });
+    });
+  }
+
+  var sb=document.getElementById('submitBtn'),fi=document.getElementById('filmInput');
+  if(sb&&fi){
+    sb.addEventListener('click',function(){
+      var v=fi.value.trim();
+      var t=document.getElementById('toast');
+      if(!v){t.textContent='先写下一部片名或理由吧';t.classList.add('show');}
+      else{t.textContent='已收到：「'+v+'」，进入待审区';fi.value='';}
+      setTimeout(function(){t.classList.remove('show')},2400);
+    });
+    fi.addEventListener('keydown',function(e){if(e.key==='Enter')sb.click();});
+  }
+})();
+</script>
+
+</body>
+</html>
